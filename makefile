@@ -3,14 +3,12 @@ PKG=github.com/drofyn/workmate
 
 VERSION=$(shell git describe --tags --always 2>/dev/null)
 COMMIT=$(shell git rev-parse HEAD)
-BUILDDATE=$(shell date +'%Y-%m-%dT%H:%M:%SZ')
 GOVERSION=$(shell go version | awk '{print $$3}')
 
 LDFLAGS=-ldflags "-s -w \
-	-X $(PKG)/cmd/root.Version=$(VERSION) \
-	-X $(PKG)/cmd/root.Commit=$(COMMIT) \
-	-X $(PKG)/cmd/root.BuildDate=$(BUILDDATE) \
-	-X $(PKG)/cmd/root.GoVersion=$(GOVERSION)"
+	-X $(PKG)/cmd.Version=$(VERSION) \
+	-X $(PKG)/cmd.Commit=$(COMMIT) \
+	-X $(PKG)/cmd.GoVersion=$(GOVERSION)"
 
 build:
 	go build $(LDFLAGS) -o $(APP_NAME)
